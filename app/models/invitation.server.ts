@@ -6,3 +6,9 @@ export async function getInvitation(id: number) {
         include: { people: true },
     });
 }
+
+export async function listInvitations() {
+    return prisma.invitation.findMany({
+        include: { people: true },
+    });
+}
