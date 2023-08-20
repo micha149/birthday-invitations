@@ -1,5 +1,5 @@
 import type { LoaderArgs, ActionArgs } from "@remix-run/node";
-import { Form, useActionData, useLoaderData } from "@remix-run/react";
+import { Form, useActionData, useLoaderData, Link } from "@remix-run/react";
 import { getInvitation, updateAnswers } from "~/models/invitation.server";
 import { InvalidHashError, decode } from '~/util/hash.server';
 import { createSalutation } from "~/util/salutation";
@@ -45,6 +45,7 @@ export default function InvitationPage() {
             <h1>Einladung</h1>
             <p>{createSalutation(data.people)}</p>
             <p>Hiermit lade ich {data.people.length === 1 ? 'dich' : 'euch'} herzlich zu meiner Gartenparty ein.</p>
+            <Link to="./ical" reloadDocument>Kalender herunterladen</Link>
             <Form method="POST">
                 {data.people.map(p => (
                     <label key={p.id} className="relative inline-flex items-center cursor-pointer">
