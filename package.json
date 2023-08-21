@@ -9,15 +9,21 @@
   },
   "dependencies": {
     "@prisma/client": "^5.1.1",
+    "@react-three/drei": "^9.80.4",
+    "@react-three/fiber": "^8.13.7",
+    "@react-three/postprocessing": "^2.15.0",
     "@remix-run/css-bundle": "^1.19.3",
     "@remix-run/node": "^1.19.3",
     "@remix-run/react": "^1.19.3",
     "@remix-run/serve": "^1.19.3",
+    "@types/three": "^0.155.0",
     "hashids": "^2.3.0",
     "ics": "^3.4.0",
     "isbot": "^3.6.8",
+    "postprocessing": "^6.33.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "three": "^0.155.0"
   },
   "devDependencies": {
     "@remix-run/dev": "^1.19.3",

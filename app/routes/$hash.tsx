@@ -3,6 +3,7 @@ import { Form, useActionData, useLoaderData, Link } from "@remix-run/react";
 import { getInvitation, updateAnswers } from "~/models/invitation.server";
 import { InvalidHashError, decode } from '~/util/hash.server';
 import { createSalutation } from "~/util/salutation";
+import Hero from "~/components/Hero";
 
 export const loader = async ({ params, request }: LoaderArgs) => {
     let id: number;
@@ -43,6 +44,7 @@ export default function InvitationPage() {
     return (
         <>
             <h1>Einladung</h1>
+            <Hero />
             <p>{createSalutation(data.people)}</p>
             <p>Hiermit lade ich {data.people.length === 1 ? 'dich' : 'euch'} herzlich zu meiner Gartenparty ein.</p>
             <Link to="./ical" reloadDocument>Kalender herunterladen</Link>
