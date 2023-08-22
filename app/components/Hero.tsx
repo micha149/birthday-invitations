@@ -30,11 +30,11 @@ function Fourty() {
 
     return (
         <>
-            <Float speed={1.01} rotationIntensity={2}>
-                <Clone object={model.nodes['Four']} position={[-5, 0, 0]} scale={2}/>
+            <Float speed={1.1} rotationIntensity={2} floatingRange={[-1, 2]}>
+                <Clone object={model.nodes['Four']} position={[-3, 0.5, 0]} scale={1.4}/>
             </Float>
-            <Float rotationIntensity={2}>
-                <Clone object={model.nodes['Zero']} position={[5, 0, 0]} scale={2}/>
+            <Float speed={1} rotationIntensity={3} floatingRange={[0, 3]}>
+                <Clone object={model.nodes['Zero']} position={[3, 0.5, 0]} scale={1.4}/>
             </Float>
         </>
     )
