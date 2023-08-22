@@ -36,3 +36,30 @@ export async function updateAnswers(invitationId: number, coming: number[]) {
         })))
     ])
 }
+
+export async function createInvitation() {
+    return prisma.invitation.create({
+        data: {
+            answered: false,
+        }
+    });
+}
+
+export async function addPerson(invitationId: number, name: string, isMale: boolean) {
+    return prisma.people.create({
+        data: {
+            invitationId,
+            name,
+            isMale,
+        }
+    });
+}
+
+export async function removePerson(invitationId: number, id: number,) {
+    return prisma.people.delete({
+        where: {
+            invitationId,
+            id
+        }
+    });
+}
