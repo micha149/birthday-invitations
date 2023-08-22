@@ -2,10 +2,13 @@ import type { ActionArgs, LoaderArgs } from "@remix-run/node";
 import { Form, useLoaderData, Link, useNavigation } from "@remix-run/react";
 import { useEffect, useRef } from "react";
 import { getInvitation, addPerson, removePerson } from "~/models/invitation.server"
+import { requireAuthentication } from "~/session.server";
 import { InvalidHashError, decode } from "~/util/hash.server";
 
-export const loader = async ({ params }: LoaderArgs) => {
+export const loader = async ({ params, request }: LoaderArgs) => {
     let invitation: Awaited<ReturnType<typeof getInvitation>> = null;
+
+    await requireAuthentication(request);
 
     try {
         const id = decode(params.hash!);

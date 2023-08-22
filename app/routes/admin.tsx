@@ -1,11 +1,15 @@
-import type { ActionArgs} from "@remix-run/node";
+import type { ActionArgs, LoaderArgs} from "@remix-run/node";
 import { redirect } from "@remix-run/node";
 import { Form, Link, useLoaderData } from "@remix-run/react";
 import { listInvitations, createInvitation } from "~/models/invitation.server"
+import { requireAuthentication } from "~/session.server";
 import { encode } from "~/util/hash.server";
 
-export const loader = async () => {
+export const loader = async ({ request }: LoaderArgs) => {
+    await requireAuthentication(request);
+
     const invitations = await listInvitations();
+
     return invitations.map(row => ({
         hash: encode(row.id),
         ...row
