@@ -3,11 +3,16 @@ import { Form, useActionData, useLoaderData, Link, useNavigation } from "@remix-
 import { getInvitation, updateAnswers } from "~/models/invitation.server";
 import { InvalidHashError, decode } from '~/util/hash.server';
 import { createSalutation } from "~/util/salutation";
-import Hero from "~/components/Hero";
-import { Suspense, useEffect, useState } from "react";
+import { Suspense, useEffect, useState, lazy } from "react";
 import GlowInk from "~/components/GlowInk";
 import Button from "~/components/Button";
 import InputToggle from "~/components/InputToggle";
+
+const Hero = lazy(() => import('~/components/Hero'));
+
+const HeroFallback = () => (
+    <img className="w-full h-full object-cover" src="/fallback.webp" alt="Bild der Zahl 40" html-fetchpriority="high" />
+);
 
 export const loader = async ({ params, request }: LoaderArgs) => {
     let id: number;
@@ -41,12 +46,6 @@ export const action = async ({params, request}: ActionArgs) => {
     return true
 };
 
-const LoadingFallback = () => (
-    <div className="h-full grid place-items-center">
-        lade…
-    </div>
-)
-
 export default function InvitationPage() {
     const data = useLoaderData<typeof loader>();
     const [editMode, setEditMode] = useState(false);
@@ -65,13 +64,13 @@ export default function InvitationPage() {
         <div className="">
 
             <div className="relative h-[800px] w-screen">
-                <Suspense fallback={<LoadingFallback />}>
+                <Suspense fallback={<HeroFallback />}>
                     <Hero />
-                    <GlowInk as="h1" className="absolute w-full top-20 inset-x-0 text-center text-9xl transform -rotate-12 -translate-x-12">
-                        Ich werde <span className="sr-only">40!</span>
-                    </GlowInk>
-                    <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black via-black/80" />
                 </Suspense>
+                <GlowInk as="h1" className="absolute w-full top-20 inset-x-0 text-center text-9xl transform -rotate-12 -translate-x-12">
+                    Ich werde <span className="sr-only">40!</span>
+                </GlowInk>
+                <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-black via-black/80" />
             </div>
 
 
